@@ -15,7 +15,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'mv C:/Users/33767/Documents/GitHub/petClinic/target/spring-petclinic-*.jar C:/Users/33767/Documents/CODE/cefim-jenkins-box/cefim-jenkins-box-master/data/spring-petclinic-prod.jar'
+                bat 'mvn C:/Users/33767/Documents/GitHub/petClinic/target/spring-petclinic-*.jar C:/Users/33767/Documents/CODE/cefim-jenkins-box/cefim-jenkins-box-master/data/spring-petclinic-prod.jar'
                 bat 'sudo systemctl restart petclinic'
             }
         }
