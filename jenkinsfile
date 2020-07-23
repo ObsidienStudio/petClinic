@@ -4,17 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo "Building..."
                 step ([$class: 'CopyArtifact',
                         projectName: 'petClinic',
                         target: 'C:/Users/33767/Documents/GitHub/petClinic']
                 );
+                echo "Building finished"
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'mv C:/Users/33767/Documents/GitHub/petClinic/target/spring-petclinic-*.jar C:/Users/33767/Documents/CODE/cefim-jenkins-box/cefim-jenkins-box-master/data/spring-petclinic-prod.jar'
-                sh 'sudo systemctl restart petclinic'
+                bat 'mv C:/Users/33767/Documents/GitHub/petClinic/target/spring-petclinic-*.jar C:/Users/33767/Documents/CODE/cefim-jenkins-box/cefim-jenkins-box-master/data/spring-petclinic-prod.jar'
+                bat 'sudo systemctl restart petclinic'
             }
         }
     }
