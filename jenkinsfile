@@ -16,8 +16,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat 'robocopy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE'
-                bat 'C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master vagrant up'
-                bat 'C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master vagrant ssh'
+                bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up'
+                bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh'
                 bat 'cd data'
                 bat 'java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar server.port=8881'
             }
