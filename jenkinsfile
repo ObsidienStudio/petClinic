@@ -15,11 +15,10 @@ pipeline {
 
         stage("Deploy") {
             steps {
-                step(
-                bat "cp C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE"
+                bat "copy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar"
                 bat "cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up"
                 bat "cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh"
-                )
+                
             }
         }
         
