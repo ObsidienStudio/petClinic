@@ -18,6 +18,8 @@ pipeline {
                 bat 'robocopy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE'
                 bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up'
                 bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh'
+            }
+        }
                 node {
   def remote = [:]
   remote.name = 'vagrant'
@@ -32,5 +34,3 @@ pipeline {
 }
             }
         }
-    }
-}
