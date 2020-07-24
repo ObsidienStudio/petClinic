@@ -2,34 +2,34 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
                 echo "Building..."
-                step ([$class: 'CopyArtifact',
-                        projectName: 'petClinic',
-                        target: 'C:/Users/33767/Documents/GitHub/petClinic']
+                step ([$class: "CopyArtifact",
+                        projectName: "petClinic",
+                        target: "C:/Users/33767/Documents/GitHub/petClinic"]
                 );
                 echo "Building finished"
             }
         }
 
-        stage('Deploy') {
+        stage("Deploy") {
             steps {
                 step(
-                bat 'robocopy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE'
-                bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up'
-                bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh'
+                bat "robocopy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE"
+                bat "cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up"
+                bat "cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh"
                 )
             }
         }
         
   def remote = [:]
-  remote.name = 'test'
-  remote.host = 'test.domain.com'
-  remote.user = 'root'
-  remote.password = 'password'
+  remote.name = "test"
+  remote.host = "test.domain.com"
+  remote.user = "root"
+  remote.password = "password"
   remote.allowAnyHosts = true
-  stage('Remote SSH') {
+  stage("Remote SSH") {
     sshCommand remote: remote, command: "cd data"
     sshCommand remote: remote, command: "java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar server.port=8881"
   }
