@@ -20,19 +20,17 @@ pipeline {
                 bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh'
             }
         }
-        stage('SSH'){
-                node {
   def remote = [:]
   remote.name = 'vagrant'
   remote.host = 'vagrant'
   remote.user = 'vagrant'
   remote.password = 'vagrant'
   remote.allowAnyHosts = true
-  stage('Remote SSH') {
+        stage('SSH'){
     sshCommand remote: remote, command: "ls -lrt"
     sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
-  }
+  
 }
         }
             }
-        }
+        
