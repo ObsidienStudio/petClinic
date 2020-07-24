@@ -15,22 +15,23 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                step(
                 bat 'robocopy C:\\Users\\33767\\Documents\\GitHub\\petClinic\\target C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\data *.jar /MOVE'
                 bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant up'
                 bat 'cd C:\\Users\\33767\\Documents\\CODE\\cefim-jenkins-box\\cefim-jenkins-box-master\\ && vagrant ssh'
+                )
             }
         }
-        stage('SSH'){
-  def remote = [:]
-  remote.name = 'vagrant'
-  remote.host = 'vagrant'
-  remote.user = 'vagrant'
-  remote.password = 'vagrant'
-  remote.allowAnyHosts = true
-    sshCommand remote: remote, command: "ls -lrt"
-    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
-  
-}
-        }
-            }
         
+  def remote = [:]
+  remote.name = 'test'
+  remote.host = 'test.domain.com'
+  remote.user = 'root'
+  remote.password = 'password'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+    sshCommand remote: remote, command: "cd data"
+    sshCommand remote: remote, command: "java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar server.port=8881"
+  }
+    }
+}
